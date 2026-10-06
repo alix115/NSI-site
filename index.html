@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="NFS HEAT — Le garage complet de Need for Speed Heat : 127 voitures, 33 constructeurs. Explore, filtre et trouve ta prochaine machine de street racing à Palm City." />
+  <title>NFS HEAT · Le garage — 127 voitures de Palm City</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230a0a12'/><text x='50' y='68' font-size='58' text-anchor='middle' fill='%23ff2d78' font-family='Arial' font-weight='bold'>H</text></svg>" />
+</head>
+<body>
+  <div class="progress-bar" id="progressBar"></div>
+
+  <!-- ===================== HEADER ===================== -->
+  <header class="header" id="header">
+    <nav class="nav container">
+      <a href="#accueil" class="logo">
+        <span class="mark">NFS</span> HEAT<em>.</em>
+      </a>
+      <button class="burger" id="burger" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#accueil">Accueil</a></li>
+        <li><a href="#gameplay">Le concept</a></li>
+        <li><a href="#garage">Garage</a></li>
+        <li><a href="#garage" class="btn-nav">Voir les voitures</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ===================== HERO ===================== -->
+  <section class="hero" id="accueil">
+    <div class="hero-content container">
+      <p class="eyebrow">Palm City · Street racing · 2019</p>
+      <h1>
+        <span class="line">Propriétaire</span>
+        <span class="line">le jour,</span>
+        <span class="line accent">fugitif la nuit.</span>
+      </h1>
+      <p class="lead">
+        Plonge dans l'univers néon de <strong>Need for Speed Heat</strong>. Cours le jour,
+        risque tout la nuit face à la police de Palm City, et construis le garage de tes
+        rêves parmi <strong>127 voitures</strong> issues de <strong>33 constructeurs</strong>.
+      </p>
+      <div class="hero-actions">
+        <a href="#garage" class="btn btn-primary">Explorer le garage</a>
+        <a href="#gameplay" class="btn btn-ghost">Découvrir le concept</a>
+      </div>
+      <div class="hero-stats">
+        <div><strong data-count="127">0</strong><span>Voitures</span></div>
+        <div><strong data-count="33">0</strong><span>Constructeurs</span></div>
+        <div><strong data-count="15">0</strong><span>Catégories</span></div>
+      </div>
+    </div>
+    <a href="#gameplay" class="scroll-cue" aria-label="Défiler"><span></span></a>
+  </section>
+
+  <!-- ===================== CONCEPT ===================== -->
+  <section class="section" id="gameplay">
+    <div class="container about-grid">
+      <div data-reveal>
+        <p class="section-kicker">Le concept</p>
+        <h2 class="section-title">Le jour, la nuit : <span class="accent">deux visages</span></h2>
+        <p class="section-text" style="margin-top:16px">
+          Palm City ne dort jamais, mais elle ne vit pas de la même façon. En journée, tu
+          participes à des courses officielles pour gagner de l'argent et préparer ta voiture.
+          La nuit tombée, tu enchaînes les courses clandestines pour gagner de la
+          <em>réputation</em> — tout en échappant à une police de plus en plus agressive.
+        </p>
+      </div>
+      <div class="duality" data-reveal>
+        <div class="duo day">
+          <div class="icon">☀️</div>
+          <h3>Le jour</h3>
+          <p>Courses sanctionnées, gains en cash, tuning et préparation. Tout est permis tant que tu restes dans les clous.</p>
+          <span class="tag">CASH</span>
+        </div>
+        <div class="duo night">
+          <div class="icon">🌙</div>
+          <h3>La nuit</h3>
+          <p>Street racing illégal, réputation (REP) et courses-poursuites avec la police. Plus le niveau de chaleur monte, plus c'est risqué.</p>
+          <span class="tag">REP + HEAT</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== GARAGE ===================== -->
+  <section class="section" id="garage">
+    <div class="container">
+      <div class="garage-head">
+        <div data-reveal>
+          <p class="section-kicker">Le garage</p>
+          <h2 class="section-title">Toutes les <span class="accent">voitures</span></h2>
+          <p class="section-text">
+            Du hypercar au pick-up, du classique des années 60 à la dernière supercar :
+            voici le catalogue complet du jeu, filtrable par catégorie et par constructeur.
+          </p>
+        </div>
+        <div class="result-count" data-reveal><span id="carCount"></span></div>
+      </div>
+
+      <div class="filters" data-reveal>
+        <div class="search-row">
+          <div class="search-box">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+            <input type="text" id="searchInput" placeholder="Rechercher une marque ou un modèle…" />
+          </div>
+          <select class="select" id="brandSelect" aria-label="Filtrer par constructeur">
+            <option value="all">Tous les constructeurs</option>
+          </select>
+        </div>
+        <div class="cat-filters" id="catFilters"></div>
+      </div>
+
+      <div class="grid" id="carGrid" style="margin-top:34px"></div>
+    </div>
+  </section>
+
+  <!-- ===================== CITATION ===================== -->
+  <section class="quote">
+    <blockquote class="container" data-reveal>
+      <p>« Construis ta réputation. <br />Possède la nuit. »</p>
+      <cite>— Need for Speed Heat</cite>
+    </blockquote>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>
+        <a href="#accueil" class="logo"><span class="mark">NFS</span> HEAT<em>.</em></a>
+        <p class="footer-text">Le garage non officiel de Need for Speed Heat — site de démonstration.</p>
+      </div>
+      <nav class="footer-links">
+        <a href="#accueil">Accueil</a>
+        <a href="#gameplay">Le concept</a>
+        <a href="#garage">Garage</a>
+      </nav>
+    </div>
+    <div class="container footer-bottom">
+      <p>© <span id="year"></span> NFS HEAT — Fan site. Need for Speed est une marque d'Electronic Arts.</p>
+      <p>127 voitures · 33 constructeurs · Palm City</p>
+    </div>
+  </footer>
+
+  <button class="to-top" id="toTop" aria-label="Retour en haut">↑</button>
+
+  <script src="js/cars.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
