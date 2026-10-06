@@ -98,7 +98,8 @@
           <h2 class="section-title">Toutes les <span class="accent">voitures</span></h2>
           <p class="section-text">
             Du hypercar au pick-up, du classique des années 60 à la dernière supercar :
-            voici le catalogue complet du jeu, filtrable par catégorie et par constructeur.
+            le catalogue complet du jeu, filtrable par catégorie et par constructeur.
+            <strong>Clique sur une voiture pour l'explorer en 3D</strong> et la regarder sous tous les angles.
           </p>
         </div>
         <div class="result-count" data-reveal><span id="carCount"></span></div>
@@ -150,7 +151,39 @@
 
   <button class="to-top" id="toTop" aria-label="Retour en haut">↑</button>
 
+  <!-- ===================== SHOWROOM 3D ===================== -->
+  <div class="showroom" id="showroom" aria-hidden="true">
+    <div class="showroom-head">
+      <div>
+        <span class="showroom-badge" id="showroomBadge">Catégorie</span>
+        <h2 class="showroom-title" id="showroomTitle">Voiture</h2>
+        <p class="showroom-sub" id="showroomSub"></p>
+      </div>
+      <button class="showroom-close" id="showroomClose" aria-label="Fermer">✕</button>
+    </div>
+
+    <div class="showroom-stage" id="showroomStage">
+      <img class="showroom-photo" id="showroomPhoto" alt="" />
+      <div class="showroom-loading" id="showroomLoading">
+        <span class="spinner"></span> Chargement du showroom 3D…
+      </div>
+      <div class="showroom-hint hidden" id="showroomHint">
+        🖱️ Glisse pour <strong>tourner autour</strong> · molette pour <strong>zoomer</strong> · double-clic pour <strong>réinitialiser</strong>
+      </div>
+    </div>
+  </div>
+
   <script src="js/cars.js"></script>
+  <script src="js/images.js"></script>
   <script src="js/main.js"></script>
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+      }
+    }
+  </script>
+  <script type="module" src="js/showroom.js"></script>
 </body>
 </html>

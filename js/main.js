@@ -130,13 +130,18 @@ function cardHTML(car, i) {
   const cat = CATEGORIES[car.cat] || CATEGORIES.Coupe;
   const perf = perfOf(car);
   const tier = tierOf(perf);
+  const img = (typeof CAR_IMAGES !== "undefined" && CAR_IMAGES[i]) ? CAR_IMAGES[i] : "";
+  const media = img
+    ? `<img class="car-photo" src="${img}" alt="${car.brand} ${car.model}" loading="lazy" onerror="this.closest('.car-art').classList.add('img-error')" />
+       <span class="car-svg-fallback">${carSVG(cat.body)}</span>`
+    : carSVG(cat.body);
   return (
-    `<article class="car-card" data-cat="${car.cat}" data-brand="${car.brand}" data-search="${(car.brand + " " + car.model).toLowerCase()}" style="--accent:${cat.color}">
+    `<article class="car-card" data-index="${i}" data-cat="${car.cat}" data-brand="${car.brand}" data-search="${(car.brand + " " + car.model).toLowerCase()}" style="--accent:${cat.color}">
       <div class="car-top">
         <span class="car-cat" style="background:${cat.color}1f;color:${cat.color};border-color:${cat.color}55">${cat.label}</span>
         <span class="car-year">${car.year}</span>
       </div>
-      <div class="car-art">${carSVG(cat.body)}</div>
+      <div class="car-art">${media}</div>
       <div class="car-info">
         <span class="car-brand">${car.brand}</span>
         <h3 class="car-model">${car.model}</h3>
@@ -145,6 +150,7 @@ function cardHTML(car, i) {
           <div class="perf-bar"><i style="width:${perf}%"></i></div>
         </div>
       </div>
+      <span class="car-view">Vue 3D ↗</span>
     </article>`
   );
 }
@@ -153,16 +159,31 @@ function render() {
   const q = searchInput.value.trim().toLowerCase();
   const brand = brandSelect.value;
 
-  const filtered = CARS.filter((car) => {
-    if (activeCat !== "all" && car.cat !== activeCat) return false;
-    if (brand !== "all" && car.brand !== brand) return false;
-    if (q && !(car.brand + " " + car.model).toLowerCase().includes(q)) return false;
-    return true;
-  });
+  const items = CARS
+    .map((car, i) => ({ car, i }))
+    .filter(({ car }) => {
+      if (activeCat !== "all" && car.cat !== activeCat) return false;
+      if (brand !== "all" && car.brand !== brand) return false;
+      if (q && !(car.brand + " " + car.model).toLowerCase().includes(q)) return false;
+      return true;
+    });
 
-  grid.innerHTML = filtered.map(cardHTML).join("");
-  countEl.textContent = filtered.length + " / " + CARS.length + " voitures";
+  grid.innerHTML = items.map(({ car, i }) => cardHTML(car, i)).join("");
+  countEl.textContent = items.length + " / " + CARS.length + " voitures";
 }
+
+// Ouverture du showroom 3D au clic sur une carte
+grid.addEventListener("click", (e) => {
+  const card = e.target.closest(".car-card");
+  if (!card) return;
+  const i = parseInt(card.dataset.index, 10);
+  const car = CARS[i];
+  const cat = CATEGORIES[car.cat] || CATEGORIES.Coupe;
+  const img = (typeof CAR_IMAGES !== "undefined" && CAR_IMAGES[i]) ? CAR_IMAGES[i] : "";
+  const payload = { car, cat, img };
+  if (typeof window.openShowroom === "function") window.openShowroom(payload);
+  else if (img) window.open(img, "_blank");
+});
 
 // ---- Événements ----
 searchInput.addEventListener("input", render);

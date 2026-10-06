@@ -6,6 +6,8 @@ Landing page non officielle consacrée à **Need for Speed Heat** (Electronic Ar
 
 - Présentation du jeu et du concept jour / nuit de Palm City
 - **Le garage complet** : les **127 voitures** du jeu, réparties sur **33 constructeurs** et **15 catégories**
+- **Photos réelles** de chaque voiture (Wikimedia Commons / Wikipédia)
+- **Showroom 3D interactif** : clique sur une voiture pour l'explorer et **orienter la caméra à 360°** (Three.js + OrbitControls)
 - Galerie filtrable (recherche, catégorie, constructeur) avec cartes néon
 - Design responsive inspiré de l'esthétique néon de Palm City
 
@@ -13,10 +15,13 @@ Landing page non officielle consacrée à **Need for Speed Heat** (Electronic Ar
 
 | Fichier | Rôle |
 | --- | --- |
-| `index.html` | Structure de la page |
+| `index.html` | Structure de la page + fenêtre showroom 3D |
 | `css/style.css` | Styles et thème néon |
 | `js/cars.js` | Données des 127 voitures (source : liste officielle EA) |
+| `js/images.js` | Chemins des photos réelles |
 | `js/main.js` | Logique : rendu, filtres, animations |
+| `js/showroom.js` | Visionneuse 3D (caméra orbitale) |
+| `assets/cars/` | Les 127 photos de voitures |
 
 ## Voir le site
 
@@ -24,3 +29,4 @@ Hébergé via **GitHub Pages** à l'adresse :
 `https://alix115.github.io/NSI-site/`
 
 > Ce site est un projet de démonstration. *Need for Speed* est une marque d'Electronic Arts.
+> Photos : Wikimedia Commons (licences libres) — crédits aux auteurs respectifs.
